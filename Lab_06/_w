@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <cpuid.h>
+
+int main()
+{
+
+	int a,b,c,d,lvl=1;
+	__get_cpuid(lvl,&a,&b,&c,&d);
+	printf("%d",a);
+	
+	int i=0
+	for(i;i<32;i++)
+	printf("%d", (a>>i) & 0x1);
+/*  printf("stepping %d\n", a & 0xF);
+  printf("model %d\n", (a>> 4) & 0xF);
+  printf("family %d\n", (a >> 8) & 0xF);
+  printf("processor type %d\n", (a >> 12) & 0x3);
+  printf("extended model %d\n", (a >> 16) & 0xF);
+  printf("extended family %d\n", (a >> 20) & 0xFF);
+*/
+
+
+
+ return 0;
+}

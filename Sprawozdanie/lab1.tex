@@ -1,0 +1,86 @@
+\chapter{Laboratorium 1}
+\section{Tematyka}
+Tematem laboratorium było zapoznanie się z podstawowymi działaniami z wykorzystaniem
+instrukcji assemblerowych. Głównym celem zajęć było przetwarzanie ciągów znaków.
+\section{Zakres prac}
+Zadaniem było stworzenie trzech aplikacji.
+\begin{enumerate}
+	\item Program który zamieniałby, w ciągu znaków, znaki duże na małe oraz małe na duże
+	\item Program który implementowałby prosty szyfr cezara
+	\item Program który szyfrował i deszyfrowałby liczby całkowite (wykorzystując program z zadania drugiego)
+Program szyfrujący miałby zostać stworzony w wariancie 32 oraz 64 bitowym.
+\end{enumerate}
+\section{Rozwiązanie}
+\subsection{Zamienianie znaków}
+Pierwsze zadanie nie było trudne. Dzięki obszernej instrukcji do zajęć laboratoryjnych bezproblemowo udało się wykonać ten prosty typ programu. Poniższy kod jest odpowiedzialny za pobranie, zmiane rozmiaru i ponowne zapisanie znaku.
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Funkcja zmieniająca rozmiar znaków]
+function:
+ movb in(,%esi,1), %al
+ cmp $END_OF_LINE, %al
+ je end
+ cmp $'Z', %al
+ jle big
+ sub $DISTANCE, %al
+ movb %al, out(,%esi,1)
+ inc %esi
+ jmp function
+
+big:
+ add $DISTANCE, %al
+ movb %al, out(,%esi,1)
+ inc %esi
+ jmp function
+\end{lstlisting}
+Nie jest to najbardziej optymalny typ rozwiązania. Z aktualną wiedzą stwierdzam, że wystarczyłoby na każdej z liter użyć funkcji XOR z odpowiednią maską która zamieniałaby jeden bit na odwrotny, który odpowiada za rozmiar litery. Takie rozwiązanie zostało wprowadzone podczas pisania funkcji XOR'ującej na kolejnych laboratoriach.
+\subsection{Szyfr cezara}
+Szyfr cezara to jeden z najbardziej znanych typów szyfrowania. Pierwszy znak wyznacza przesunięcie znaków w alfabecie. Przyjęto, iż znak "`A"' oznacza brak szyfrowania. Przyjęto także, że duży pierwszy znak ma powodować szyfrowanie, a mały znak deszyfrowanie. A co dalej następuje, pierwszy znak należy najpierw wyciągnąć i zweryfikować z czym mamy do czynienia.
+
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Rozpoznanie znaku]
+Sign:
+ mov $0, %ecx
+ movb in(,%esi,1), %cl
+
+ cmp $'A', %cl
+ jl end
+ cmp $'z', %cl
+ jg end
+ cmp $'Z', %cl
+ jle Decryption
+
+Encryption:
+ sub $'a', %ecx
+eFunction:
+ inc %esi
+ movb in(,%esi,1), %al
+ cmp $END_OF_LINE, %al
+ je end
+\end{lstlisting}
+
+Po zapoznaniu się ze znakiem i typu działania, rozpoczynamy działanie na reszcie ciągu znaków. Każdy ze znaków należy przesunąć o odpowiednią wartość w lewo lub prawo, a następnie zweryfikować, czy nie wyszliśmy poza zakres liter. W przypadku przekroczenia zakresu liter, należy odjąć litery, aby doprowadzić do zapętlenia.
+
+\subsection{Szyfrowanie liczb}
+Z szyfrowaniem liczb nie było dużego problemu. Postawione założenie mówi, iż gdy w ciągu znaków zostaną odnalezione cyfry, należy je poprzedzić znakiem "`X"', a każdą z cyfr potraktować jak kolejne znaki alfabetu. Dla przykładu dla liczby "`1994"' należałoby przeprowadzić konwersje na "`xAIID"'. Budzi to pewne obawy, gdyż przy dekodowaniu po trafieniu na znak "`X"' powinniśmy znaki z zakresu od A do I traktować jako liczby, a co jeśli to już będzie zakodowana treść a nie liczba? Tak więc do kodu z zadania drugiego została dorobiona funkcja która sprawdza nasz ciąg znaków i w miarę potrzeby zamienia wykryte w nim liczby według powyższego schematy 
+
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Szyfrowanie liczb całkowitych]
+ movb text(,%esi,1), %cl
+ cmp $END_OF_LINE, %cl
+ je trEnd
+ cmp $'0', %cl
+ jl trSave
+ cmp $'9', %cl
+ jg trSave
+
+trNumberStart:
+ movb $'X', in(,%edi,1)
+ inc %edi
+
+trNumber:
+ subb $NUMBER, %cl
+ addb $'A', %cl
+ movb %cl, in(,%edi,1)
+ inc %esi
+ inc %edi
+\end{lstlisting}
+
+\section{Wnioski}
+Pisanie w assemblerze nie jest prostym tematem. Należy zwracać uwagę na wiele szczegółów na które przy pisaniu chociażby w C nikt nie zwraca uwagi. Najtrudniej było rozpocząć pracę z instrukcjami, pamiętać co dzieje się z rejestrami w przypadku niektórych instrukcji. W przypadku pisania aplikacji pod system x86, przy małej ilości rejestrów bardzo pomocny okazał się bufor i stos. Inny problem sprawiło późniejsze zrozumienie co dzieje się w kodzie, gdzie z pomocą przyszedł debugger GDB. Dzięki opanowaniu tego narzędzia z powodzeniem można było przejrzeć krokowo zmiany w pamięci i rejestrze.

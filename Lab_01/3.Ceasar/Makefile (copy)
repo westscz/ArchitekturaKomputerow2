@@ -1,0 +1,11 @@
+make: ceasar.s
+	as -g -o ceasar.o ceasar.s
+	ld -o ceasar ceasar.o
+	./ceasar
+
+build: ceasar.s
+	as -g -o ceasar.o ceasar.s
+	ld -o ceasar ceasar.o
+
+clean:
+	rm -f ceasar ceasar.o

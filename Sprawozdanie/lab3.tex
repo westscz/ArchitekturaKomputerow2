@@ -1,0 +1,54 @@
+\chapter{Laboratorium 3}
+\section{Tematyka}
+Tematem laboratorium było zapoznanie się ze sposobem łączenia instrukcji assemblerowych
+z kodem napisanym w C.
+\section{Zakres prac}
+Zadaniem było stworzenie trzech aplikacji wykorzystując łączenie asemblera z C:
+\begin{enumerate}
+	\item Program który wczyta dane w C, przetworzy je w ASM a następnie wyświetli w C
+	\item Program który wczyta dane w ASM, przetworzy i wyświetli w C
+	\item Program który wczyta dane w C, przetworzy je za pomocą wstawki ASM a następnie wyświetli w C
+\end{enumerate}}
+
+\section{Rozwiązanie}
+Od strony C zadanie nie wymagało dużej wiedzy. Aby skorzystać z funkcji napisanej w ASM należało dodać tutaj regułkę "`extern"'. Dzięki temu już mogliśmy działać z naszą funkcją, a jeśli wystąpiłby błąd - były on spowodowany na pewno po stronie kodu ASM.
+\begin{lstlisting}[language=c, frame=single,showstringspaces=false, basicstyle=\small, caption=Funkcja obliczająca silnie iteracyjnie]
+#include <stdio.h>
+
+extern int silnia(int num);
+
+int main(){
+	int wartosc;
+	scanf("%d", &wartosc);
+	int wynik = silnia(wartosc);
+	printf("Silnia z %d = %d\n",wartosc, wynik);
+}
+\end{lstlisting}
+
+Do połączenia wykorzystano funkcję z poprzednich zajęć do obliczania iteracyjnie silni.
+
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Funkcja obliczająca silnie iteracyjnie]
+.text
+.globl silnia
+silnia:
+ pushq %rbp
+ movq %rsp, %rbp
+ movq %rdi, %rbx  
+ 
+ mov $1, %eax
+ mov $0, %ecx
+Silnia_func:
+ inc %ecx
+ mul %ecx
+ cmp %ebx, %ecx
+ jne Silnia_func
+
+ movq %rbp, %rsp
+ pop %rbp
+ret
+\end{lstlisting}
+
+Ze względu na problemy przy kompilacji oraz problem niedoczytania dokumentacji kompilatora, nie udało się wykonać na zajęciach więcej zadań. Na sprzęcie laboratoryjnym brakowało biblioteki do kompilacji kodu 32 bitowego, przez co należało przejść na kod 64 bitowy. Ten natomiast przy kompilacji za pomocą "`gcc"' nie wprowadzał pierwszych 6 argumentów na stos, a do rejestrów. Z tego kompilatora wycofano opcje dodania flagi, aby argumenty trafiły na stos.
+
+\section{Wnioski}
+Łączenie języków C i assembler przebiega w dużej mierze bezkolizyjnie. Może się to przydać w sytuacji gdy chcemy wykorzystać w naszym kodzie assemblerowym jakąś funkcję napisaną w C, której nie chcemy przepisywać na assemblera bądź gdy chcemy przyspieszyć pewne operacje poprzez wykonanie operacji za pomocą instrukcji assemblerowych. Problem zaczyna się, gdy chcemy przenieść się na platformę 64 bitową, gdyż nowa wersja "`gcc"' nie wspiera wprowadzania wszystkich argumentów na stos, przez co kod wymaga dużo większej refaktoryzacji.

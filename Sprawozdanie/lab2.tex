@@ -1,0 +1,71 @@
+\chapter{Laboratorium 2}
+\section{Tematyka}
+Tematem laboratorium było zapoznanie się z działaniem stosu i tworzeniem funkcji
+go wykorzystujących.
+\section{Zakres prac}
+Zadaniem było stworzenie trzech aplikacji.
+\begin{enumerate}
+	\item Program z funkcją do xor'owania liczb
+	\item Program z funkcją wykorzystujący pętlę sterującą (np. silnia, fibonacci)
+	\item Program z funkcją rekurencyjną (np. silnia, fibonacci)
+\end{enumerate}
+Programy powinny zostać wykonane w wariancie 32 oraz 64 bitowym. Celem jest możliwość porównania czasu działania, oraz przejrzystości kodu dla dwóch typów pisania funkcji (rekurencyjnej oraz z użyciem pętli)
+
+\section{Rozwiązanie}
+\subsection{XOR'orwanie liczb}
+Jako pierwsze zadanie, aby zapoznać się ze sposobem tworzenia funkcji i przekazywania argumentów stworzono funkcje xor. Funkcja ta ma stworzoną maskę do zmiany rozmiaru znaków wprowadzanych jako argument funkcji. Ważna jest tutaj przyjęta konwencja, aby argumenty na stos przed wywołaniem funkcji wprowadzać w odwrotnej kolejności. Na początku funkcji zabezpieczamy aktualną wartość rejestru "`ebp"' aby nie utracić adresu powrotu z funkcji. Na końcu przywracamy ten rejestr i używamy instrukcji return która wróci do miejsca gdzie została wywołana funkcja.
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Funkcja XORująca]
+ push %eax
+ call xor_func
+ pop %ecx
+
+ mov $EXIT, %eax
+ mov $ERROR, %ebx
+ int $SYSCALL
+
+xor_func:
+ push %ebp
+ mov %esp, %ebp
+ mov 8(%ebp),%ebx
+ 
+ xor $0b00100000, %ebx
+
+ mov %ebx, 8(%ebp)
+ mov %ebp, %esp
+ pop %ebp
+ ret
+\end{lstlisting}
+
+\subsection{Silnia wykorzystująca rekurencje}
+Funkcja rekurencyjna powinna być tak zaprojektowana, aby wywoływać samą siebie w przypadku gdy nie zostanie spełniona pewna własność. W przypadku silni, uruchamiamy kolejną funkcje dopóki nie zejdziemy do pierwszej liczby. Większość kodu funkcji rekurencyjnej to wprowadzanie argumentów, ich odczyt, i wywoływanie funkcji.
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Silnia - rekurencyjnie]
+Silnia:
+ push %ebp
+ mov %esp, %ebp
+ mov 8(%ebp), %eax
+ cmp $1, %eax
+ je EndSilnia
+ dec %eax
+ push %eax
+ call Silnia
+ mov 8(%ebp), %ebx
+ mul %ebx
+EndSilnia:
+ mov %ebp, %esp
+ pop %ebp
+ ret
+\end{lstlisting}
+
+Dla porównania ilości kodu oraz jego skomplikowania, została napisana silnia iteracyjna. Jest dużo prostsza, gdyż od razu przechodzi do liczenia, i wymnaża kolejne wartości aż do momentu gdy mnożnik będzie równy wprowadzonemu jako argument funkcjii.
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Silnia - iteracyjnie]
+ mov $1, %eax
+ mov $0, %ecx
+Silnia:
+ inc %ecx
+ mul %ecx
+ cmp %ebx, %ecx
+ jne Silnia
+\end{lstlisting}
+Jak widać, silnia iteracyjna jest dużo prostsza w zapisie i łatwiejsza do czytania niż jej wersja rekurencyjna. Jest też dużo mniej awaryjna, gdyż jest mniejsza szansa na utracenie danych.
+\section{Wnioski}
+Pisanie funkcji w assemblerze jest podobne do pisania funkcji w C. Oczywiście nie jest ono dokładnie tak samo, gdyż wymaga od nas pamiętania o wielu szczegółach takich jak kolejność wprowadzania wartości na stos, czy zapamiętanie adresu powrotu. Mimo wszystko pisanie funkcji nie jest trudne. 

@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head> 
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+      
+    <link rel="stylesheet" type="text/css" href="guidevideo/standard.css" media="screen" title="Standard">
+<link rel="alternate stylesheet" type="text/css" href="guidevideo/dark.css" media="screen" title="Dark">
+<link rel="alternate stylesheet" type="text/css" href="guidevideo/gnu.css" media="screen" title="Gnu">
+    
+    <link rel="stylesheet" type="text/css" href="guidevideo/print.css" media="print" title="print"><title>Graphics and Video</title>
+  
+
+  
+  
+  
+  
+  <link rel="PREVIOUS" title="Initializing SDL" href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidebasicsinit.html">
+  <link rel="NEXT" title="Using OpenGL With SDL" href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideoopengl.html"></head><body>
+    <div class="mandralogo">
+      <div class="searchform">
+        <form method="get" action="http://docs.mandragor.org/search.php">
+          <p style="margin: 0pt; padding: 0pt;">
+            <input name="searchinput" value="" accesskey="S" type="text">
+            <input name="page" value="1" type="hidden"><input name="limtodirectory" value="Common_libs_documentation/SDL/SDL_Documentation_project_en/" type="hidden"><input value="Search!" type="submit"></p>
+          <label class="limitsearch">
+            <input name="limitsearch" type="checkbox"> Limit search to current directory</label>
+        </form>
+        <a class="advanced_search" href="http://docs.mandragor.org/advanced_search.php">&gt;&gt; Advanced search</a>
+      </div>
+      <a href="http://docs.mandragor.org/"></a>
+      <br style="clear: both;">
+    </div>
+    <div class="navig"><a href="http://docs.mandragor.org/">Home</a> &gt; <a href="http://docs.mandragor.org/files/Common_libs_documentation/">Common libs documentation</a> &gt; <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/">SDL</a> &gt; <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/">SDL Documentation project en</a> &gt; <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideo.html">guidevideo.html</a></div>
+    <div class="mandracontent">
+  <div class="NAVHEADER">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+        <th colspan="3" align="center">SDL Library
+        Documentation</th>
+      </tr>
+
+      <tr>
+        <td align="left" valign="bottom" width="10%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidebasicsinit.html">Prev</a>
+            </td>
+
+        <td align="center" valign="bottom" width="80%"></td>
+
+        <td align="right" valign="bottom" width="10%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideoopengl.html">Next</a>
+            </td>
+      </tr>
+    </tbody></table>
+    <hr align="left" width="100%">
+  </div>
+
+  <div class="CHAPTER">
+    <h1>
+          <a name="GUIDEVIDEO" id="GUIDEVIDEO">Chapter 2. Graphics
+    and Video</a>
+        </h1>
+
+    <div class="TOC">
+      <dl>
+        <dt>
+              <b>Table of Contents</b>
+            </dt>
+
+        <dt>
+              <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideo.html#GUIDEVIDEOINTRO">Introduction
+        to SDL Video</a>
+            </dt>
+
+        <dt>
+              <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideoopengl.html">Using OpenGL With
+        SDL</a>
+            </dt>
+      </dl>
+    </div>
+
+    <div class="SECT1">
+      <h1 class="SECT1">
+            <a name="GUIDEVIDEOINTRO" id="GUIDEVIDEOINTRO">Introduction to SDL Video</a>
+          </h1>
+
+      <p>Video is probably the most common thing that SDL is used
+      for, and so it has the most complete subsystem. Here are a
+      few examples to demonstrate the basics.</p>
+
+      <div class="SECT2">
+        <h2 class="SECT2">
+              <a name="AEN68" id="AEN68">Initializing
+        the Video Display</a>
+            </h2>
+
+        <p>This is what almost all SDL programs have to do in one
+        way or another.</p>
+
+        <div class="EXAMPLE">
+          <a name="AEN71" id="AEN71"></a> 
+
+          <p>
+                <b>Example 2-1. Initializing the Video Display</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">    SDL_Surface *screen;
+
+    /* Initialize the SDL library */
+    if( SDL_Init(SDL_INIT_VIDEO) &lt; 0 ) {
+        fprintf(stderr,
+                "Couldn't initialize SDL: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    /* Clean up on exit */
+    atexit(SDL_Quit);
+    
+    /*
+     * Initialize the display in a 640x480 8-bit palettized mode,
+     * requesting a software surface
+     */
+    screen = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);
+    if ( screen == NULL ) {
+        fprintf(stderr, "Couldn't set 640x480x8 video mode: %s\n",
+                        SDL_GetError());
+        exit(1);
+    }
+</pre>
+        </div>
+      </div>
+
+      <div class="SECT2">
+        <h2 class="SECT2">
+              <a name="AEN74" id="AEN74">Initializing
+        the Best Video Mode</a>
+            </h2>
+
+        <p>If you have a preference for a certain pixel depth but
+        will accept any other, use SDL_SetVideoMode with
+        SDL_ANYFORMAT as below. You can also use SDL_VideoModeOK()
+        to find the native video mode that is closest to the mode
+        you request.</p>
+
+        <div class="EXAMPLE">
+          <a name="AEN77" id="AEN77"></a> 
+
+          <p>
+                <b>Example 2-2. Initializing the Best Video
+          Mode</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">    /* Have a preference for 8-bit, but accept any depth */
+    screen = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE|SDL_ANYFORMAT);
+    if ( screen == NULL ) {
+        fprintf(stderr, "Couldn't set 640x480x8 video mode: %s\n",
+                        SDL_GetError());
+        exit(1);
+    }
+    printf("Set 640x480 at %d bits-per-pixel mode\n",
+           screen-&gt;format-&gt;BitsPerPixel);
+</pre>
+        </div>
+      </div>
+
+      <div class="SECT2">
+        <h2 class="SECT2">
+              <a name="AEN80" id="AEN80">Loading and
+        Displaying a BMP File</a>
+            </h2>
+
+        <p>The following function loads and displays a BMP file
+        given as argument, once SDL is initialised and a video mode
+        has been set.</p>
+
+        <div class="EXAMPLE">
+          <a name="AEN83" id="AEN83"></a> 
+
+          <p>
+                <b>Example 2-3. Loading and Displaying a BMP
+          File</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">void display_bmp(char *file_name)
+{
+    SDL_Surface *image;
+
+    /* Load the BMP file into a surface */
+    image = SDL_LoadBMP(file_name);
+    if (image == NULL) {
+        fprintf(stderr, "Couldn't load %s: %s\n", file_name, SDL_GetError());
+        return;
+    }
+
+    /*
+     * Palettized screen modes will have a default palette (a standard
+     * 8*8*4 colour cube), but if the image is palettized as well we can
+     * use that palette for a nicer colour matching
+     */
+    if (image-&gt;format-&gt;palette &amp;&amp; screen-&gt;format-&gt;palette) {
+    SDL_SetColors(screen, image-&gt;format-&gt;palette-&gt;colors, 0,
+                  image-&gt;format-&gt;palette-&gt;ncolors);
+    }
+
+    /* Blit onto the screen surface */
+    if(SDL_BlitSurface(image, NULL, screen, NULL) &lt; 0)
+        fprintf(stderr, "BlitSurface error: %s\n", SDL_GetError());
+
+    SDL_UpdateRect(screen, 0, 0, image-&gt;w, image-&gt;h);
+
+    /* Free the allocated BMP surface */
+    SDL_FreeSurface(image);
+}
+</pre>
+        </div>
+      </div>
+
+      <div class="SECT2">
+        <h2 class="SECT2">
+              <a name="AEN86" id="AEN86">Drawing
+        Directly to the Display</a>
+            </h2>
+
+        <p>The following two functions can be used to get and set
+        single pixels of a surface. They are carefully written to
+        work with any depth currently supported by SDL. Remember to
+        lock the surface before calling them, and to unlock it
+        before calling any other SDL functions.</p>
+
+        <p>To convert between pixel values and their red, green,
+        blue components, use SDL_GetRGB() and SDL_MapRGB().</p>
+
+        <div class="EXAMPLE">
+          <a name="AEN90" id="AEN90"></a> 
+
+          <p>
+                <b>Example 2-4. getpixel()</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">/*
+ * Return the pixel value at (x, y)
+ * NOTE: The surface must be locked before calling this!
+ */
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
+{
+    int bpp = surface-&gt;format-&gt;BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    Uint8 *p = (Uint8 *)surface-&gt;pixels + y * surface-&gt;pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        return *p;
+
+    case 2:
+        return *(Uint16 *)p;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] &lt;&lt; 16 | p[1] &lt;&lt; 8 | p[2];
+        else
+            return p[0] | p[1] &lt;&lt; 8 | p[2] &lt;&lt; 16;
+
+    case 4:
+        return *(Uint32 *)p;
+
+    default:
+        return 0;       /* shouldn't happen, but avoids warnings */
+    }
+}
+</pre>
+        </div>
+
+        <div class="EXAMPLE">
+          <a name="AEN93" id="AEN93"></a> 
+
+          <p>
+                <b>Example 2-5. putpixel()</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">/*
+ * Set the pixel at (x, y) to the given value
+ * NOTE: The surface must be locked before calling this!
+ */
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+{
+    int bpp = surface-&gt;format-&gt;BytesPerPixel;
+    /* Here p is the address to the pixel we want to set */
+    Uint8 *p = (Uint8 *)surface-&gt;pixels + y * surface-&gt;pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        *p = pixel;
+        break;
+
+    case 2:
+        *(Uint16 *)p = pixel;
+        break;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+            p[0] = (pixel &gt;&gt; 16) &amp; 0xff;
+            p[1] = (pixel &gt;&gt; 8) &amp; 0xff;
+            p[2] = pixel &amp; 0xff;
+        } else {
+            p[0] = pixel &amp; 0xff;
+            p[1] = (pixel &gt;&gt; 8) &amp; 0xff;
+            p[2] = (pixel &gt;&gt; 16) &amp; 0xff;
+        }
+        break;
+
+    case 4:
+        *(Uint32 *)p = pixel;
+        break;
+    }
+}
+</pre>
+        </div>
+
+        <p>The following code uses the putpixel() function above to
+        set a yellow pixel in the middle of the screen.</p>
+
+        <div class="EXAMPLE">
+          <a name="AEN97" id="AEN97"></a> 
+
+          <p>
+                <b>Example 2-6. Using putpixel()</b>
+              </p>
+          <pre class="PROGRAMLISTING" xml:space="preserve">    /* Code to set a yellow pixel at the center of the screen */
+
+    int x, y;
+    Uint32 yellow;
+
+    /* Map the color yellow to this display (R=0xff, G=0xFF, B=0x00)
+       Note:  If the display is palettized, you must set the palette first.
+    */
+    yellow = SDL_MapRGB(screen-&gt;format, 0xff, 0xff, 0x00);
+
+    x = screen-&gt;w / 2;
+    y = screen-&gt;h / 2;
+
+    /* Lock the screen for direct access to the pixels */
+    if ( SDL_MUSTLOCK(screen) ) {
+        if ( SDL_LockSurface(screen) &lt; 0 ) {
+            fprintf(stderr, "Can't lock screen: %s\n", SDL_GetError());
+            return;
+        }
+    }
+
+    putpixel(screen, x, y, yellow);
+
+    if ( SDL_MUSTLOCK(screen) ) {
+        SDL_UnlockSurface(screen);
+    }
+    /* Update just the part of the display that we've changed */
+    SDL_UpdateRect(screen, x, y, 1, 1);
+
+    return;
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%">
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+        <td align="left" valign="top" width="33%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidebasicsinit.html">Prev</a>
+            </td>
+
+        <td align="center" valign="top" width="34%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/index.html">Home</a>
+            </td>
+
+        <td align="right" valign="top" width="33%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guidevideoopengl.html">Next</a>
+            </td>
+      </tr>
+
+      <tr>
+        <td align="left" valign="top" width="33%">Initializing
+        SDL</td>
+
+        <td align="center" valign="top" width="34%">
+        <a href="http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/guide.html">Up</a>
+            </td>
+
+        <td align="right" valign="top" width="33%">Using OpenGL
+        With SDL</td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+    <div>
+      <a href="#top"><img class="mandraback" src="guidevideo/back.gif" alt="Retour en haut de la page"></a>
+    </div>
+    <div class="mandracopyright">
+      Mandragor.org - Version 8.3
+    </div>
+  
+</body></html>

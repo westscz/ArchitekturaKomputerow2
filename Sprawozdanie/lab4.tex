@@ -1,0 +1,33 @@
+\chapter{Laboratorium 4}
+
+\section{Tematyka}
+Tematem laboratorium było zapoznanie się z działaniem FPU.
+\section{Zakres prac}
+Zadaniem było stworzenie trzech aplikacji wykorzystujących łączenie ASM i C:
+\begin{enumerate}
+	\item Program który odczyta i zinterpretuje dane z rejestru stanu (FPSR) oraz ustawi odpowiednie bity rejestru sterującego (FPCR)
+	\item Program który wytwarza poszczególne wyjątki zmiennoprzecinkowe i wyświetla odpowiednie komentarze
+	\item Program który pozwoli na przeprowadzenie operacji zmiennoprzecinkowych w dwóch wersjach. Pierwsza jako proste liczenie pola trójkąta, druga wykorzystująca iteracje (np. metoda Newtona-Raphsona)
+\end{enumerate}
+Przy każdym z zadań działania powinny być przeprowadzone w kodzie ASM. Cała reszta jak pobranie argumentów czy wyświetlenie wyników powinno być wykonane w C.
+
+\section{Rozwiązanie}
+\subsection{Odczytanie rejestru stanu}
+Do odczytania rejestru stanu wykorzystano specjalne instrukcje. Następnie po uzyskaniu wartości statusu, należało zweryfikować jego poszczególne bity. Nas interesowało pierwsze sześć bitów. Aby tego dokonać w jak najprostszy sposób skorzystano z intrukcji "`shr"' która przesuwa bity o zadaną ilość bitów w prawo, przy przesuwaniu ich o jeden bit, ten trafiał do flagi TODO (flagi przeniesienia), a tą można zweryfikować instrukcją "`lea"'. W ten sposób sprawdzono każdy kolejny bit, i wyświetlono odpowiedni komunikat gdy natrafiono na przeniesienie.
+\begin{lstlisting}[frame=single, basicstyle=\small, caption=Odczytanie i weryfikacja rejestru stanu]
+  fstsw	statusword
+  fwait
+  mov	statusword, %bx
+
+  mov $1, %cl
+  and $0, %rax
+check_operation:
+  shr %rbx
+  jnc check_denormal
+  leaq err_operation, %rdi
+  call printf
+\end{lstlisting}
+Ze względu na dopieszczenie kodu do perfekcji, zmieniając metody przetwarzania statusu, to zadanie zajęło zbyt dużą część laboratorium. Odczytanie rejestru sterującego byłoby rozwiązane w sposób podobny, jednakże tam uwagę należałoby zwrócić na dwie pary bitów: 11-10 oraz 9-8. Bity sprawdzamy tak jak powyżej, z pomocą instrukcji "`shr"'. 
+
+\section{Wnioski}
+Ze względu na problemy związane ze zrozumieniem działania jednostki zmiennoprzecinkowej oraz problemu związanego z pewnymi instrukcjami na zajęciach laboratoryjnych nie udało się ukończyć drugiej części zadania. Jest to na pewno jednostka bardzo przydatna do przeprowadzania dokładnych obliczeń, z wartościami po przecinku. Pisanie kodu w assemblerze pozwala nam także na zmianę precyzji tych obliczeń oraz sposobu zaokrąglania co także można uznać za plus.
