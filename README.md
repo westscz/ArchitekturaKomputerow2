@@ -1,7 +1,7 @@
 # Informacje podstawowe
 Kody programów do zajęć laboratoryjnych z Architektury Komputerów w trybie przyspieszonym (programy z podstawowego kursu rozszerzone o kolejne funkcje)
 
-# [Wiki](https://gitlab.com/jaroslaw.piszczala/ArchitekturaKomputerow2/wikis/home)
+# [Wiki](https://github.com/westscz/ArchitekturaKomputerow2/wiki)
 Na potrzeby repozytorium tworzone jest Wiki w którym opisuje wszystko związane z kursem co może pomóc w przebrnięciu przez nie.
 
 # Repozytoria
