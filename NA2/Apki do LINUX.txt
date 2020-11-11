@@ -1,0 +1,5 @@
+﻿RapidSVN - do wymiany plików przez SVN
+
+Sublime Text - do pisania aplikacji
+
+Data Display Debuger - do debugowania aplikacji

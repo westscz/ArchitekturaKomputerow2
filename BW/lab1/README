@@ -1,0 +1,7 @@
+Plik cw1.s jest programem przekopiowanym ze wzorcowego wypracowania i ma za zadanie wyświetlić na ekranie "Hello World", do kompilacji go został dołożony plik cw1Makefile
+
+Plik cw2.s ma za zadanie wczytać z konsoli tekst podany przez użytkownika, a następnie go wyświetlić w konsoli. Tekst podany przez użytkownika nie może przekraczać 10 znaków. Do kompilacji kodu został dołączony plik cw2Makefile.
+
+Plik cw3.s ma za zadanie wczytać tekst z konsoli podany przez użytkownika, zamienić wszystkie znaki niealfanumeryczne na spacje, a następnie wyświetlić zmieniony ciąg znaków na konsoli. Ograniczenie programu jest takie same jak w cw2 tzn. tekst podany przez użytkownika nie może przekraczać 10 znaków. Do kompilacji kodu został dołączony plik cw3Makefile. 
+
+

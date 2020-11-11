@@ -1,0 +1,9 @@
+1. Napisać w ASM funkcje pozwalające na 
+	a)sprawdzenie
+	b)zmianę precyzji (FPU)
+
+Program w C: a->b->a
+
+2. Napisać w ASM funkcję obliczającą aproksymację funkcji sinus (szereg Taylora).
+
+sinus(kat, l_krokow)

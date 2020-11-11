@@ -1,0 +1,36 @@
+#b Encryption
+#b NextEn if $esi>2
+b EndCalculator
+
+def regs
+ si
+ printf "a=%d b=%d c=%d d=%d",$eax,$ebx,$ecx,$edx
+
+end
+
+def dec
+ c
+ print $eax
+ print $ebx
+end
+
+
+def krok
+ si
+ print $eax
+ print $ebx
+end
+
+def out_test
+ x/10cb &out
+end
+
+def al
+ print $al
+end
+
+def bl
+ print $bl
+end
+ 
+

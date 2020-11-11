@@ -1,0 +1,2 @@
+all:
+	gcc -S scan.c print.c

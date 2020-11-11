@@ -1,0 +1,36 @@
+Zadania na lab4:
+1. napisać funkcję set_fpu.s (wersja na ocenę bdb: zmienić tylko jeden wybrany
+parametr podając symbolicznie nową wartość)
+2. zademonstrować różnice w wyniku dodawania/odejmowania/mnożenia/dzielenia na
+FPU po zmianie ustawień FPU (precyzja, zaokrąglanie), (na ocenę bdb: pokazać
+wynik w postaci znaku,wykładnika,części ułamkowej, zakodowanych szesnastkowo)
+3. napisać program liczący całkę 1/x od 0.001 do 1000 metodą prostokątów lub
+trapezów
+4. funkcję (lub zestaw funkcji) liczącą całkę napisać w asemblerze z FPU
+5. zmierzyć czas działania funkcji w cyklach - wykorzystać instrukcję rdtsc
+Wynik: lab4.c set_fpu.s get_fpu.s integrate.s Makefile README
+Wymaganie na ocenę bdb: dodać parametry do funkcji integrate(od, do, liczba_kroków, tryb_fpu)
+i pokazać zmiany czasu i wyników w zależności od trybu działania FPU i liczby kroków.
+Uwaga: ocenie podlega również jakość kodu (w tym czytelność i wydajność)
+Lektura obowiązkowa!: rozdział 8. tom 1. Intel Software Developer Manual
+- Programming with FPU
+Proszę doczytać również: rozdział 6.4.5 Handling Floating-Point Exceptions z
+Intel Software Developers Manual (tom 1), oraz podrozdziały 4.9.1, 4.9.3, 8.4
+oraz 8.5
+######################## gcc - kompilacja na FPU #############################
+gcc -mfpmath=(387|sse|both) - wykorzystanie FPU, jednostki wektorowej lub obu
+Pełna lista opcji gcc specyficznych dla architektury x86:
+http://gcc.gnu.org/onlinedocs/gcc-4.4.7/gcc/i386-and-x86_002d64-Options.html#i386-and-x86_002d64-Options
+######################### notatki i zagadnienia ##############################
+Czytając dokumentację, proszę zwrócić szczególną uwagę na:
+- operacje na rejestrach kontrolnym i statusu (np. zmiana precyzji czy trybu
+  zaokraglania)
+- wywolywanie wyjatkow (dzielenie przez zero, precyzja itp)
+- obserwację trybu zaokraglania
+- podstawy pisania wydajnego kodu - rownolegle wykonywanie obliczen w roznych
+  jednostkach, np. mnozacej, dodajacej i przesylajacej dane
+  Po zaliczeniu student powinien umiec poprawnie napisac kod wykonujacy
+  proste obliczenia zmiennoprzecinkowe (calki, rozniczki, wartosci funkcji z
+  szeregu Taylora itp), przeanalizowac przyczyny powstawania bledow
+  obliczeniowych i wykrywac bledy w trakcie obliczen
+

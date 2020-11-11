@@ -1,0 +1,7 @@
+# reguła linkowania
+cw3: cw3.o
+	ld -o cw3 cw3.o
+
+# reguła kompilacji
+cw3.o: cw3.s
+	as -o cw3.o cw3.s

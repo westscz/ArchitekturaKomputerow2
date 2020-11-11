@@ -1,0 +1,7 @@
+# reguła linkowania
+cw1: cw1.o
+	ld -o cw1 cw1.o
+
+# reguła kompilacji
+cw1.o: cw1.s
+	as -o cw1.o cw1.s

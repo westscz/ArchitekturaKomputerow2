@@ -1,0 +1,17 @@
+Program reazliuje zadane zagadnienia.
+
+Wczytywane sa liczby dopoki nie podamy dwoch znakow nowej linii.
+Nastepnie identyfikuje liczby na podstawie przedrostka.
+Mozliwe sa nastepujace systemy liczbowe:
+ - 0b - binarny
+ - 0o - osemkowy
+ - 0x - szesnastkowy
+ - brak przedrostka - dziesietny
+
+NAstepuje konwersja liczb na wartosci w systemie dziesietnym(zapisywane w osobnej tablicy),
+po czym wszystkie tablice sortowane sa wzgledem wartosci.
+
+Na koniec wypisywane sa bazy, liczby i ich wartosci rosnaco pod wzgledem wartosci.
+
+W przypadku blednie wpisanej liczby w wyniku jako wartosc liczby wypisywane jest '0',
+natomiast pomijana jest baza.

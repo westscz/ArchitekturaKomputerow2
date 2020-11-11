@@ -1,0 +1,33 @@
+Lab 5 Rozszerzenia wektorowe SSE
+Zadanie: Zoptymalizować szybkość działania programu numerycznie obliczającego
+całkę funkcji wykorzystując równoległość na poziomie instrukcji. Przedstawić
+zależności pomiędzy wydajnością a dokładnością obliczeń.
+
+Program obliczający całkę metodą prostokątów bazuje na pętli. W zależności od
+oczekiwanej dokładności wymaga to setek tysięcy lub milionów iteracji.
+Wykorzystanie rozszerzeń wektorowych pozwala na wykonanie operacji na 2 lub 4
+kolejnych prostokątach w jednym kroku, efektywnie ograniczając liczbę powtórzeń i
+skracając czas obliczeń.
+
+Państwa zadaniem będzie optymalizacja szybkości i dokładności obliczeń
+numerycznych z wykorzystaniem instrukcji typu SIMD dostępnych w procesorach
+w laboratorium (http://en.wikipedia.org/wiki/SIMD).
+
+Zagadnienia dodatkowe:
+Optymalizacja kodu na etapie kompilacji (flagi optymalizacyjne gcc: -OS, -O1-3):
+- porównać wielkość pliku wynikowego, stopień optymalizacji (-S), wykorzystane
+  opcje (man gcc -> szukać -O3)
+Podstawy profilowania kodu z wykorzystaniem narzędzia gprof.
+Pomiar czasu wykonania kodu przy użyciu instrukcji RDTSC oraz
+programu/polecenia time (man time)
+
+Lektura podstawowa:
+Rozdziały 10 i 11 (SSE i SSE2) z Intel® 64 and IA-32 Architectures Software
+Developer’s Manual.
+http://www.thegeekstuff.com/2012/08/gprof-tutorial/
+
+Lektura dodatkowa:
+http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions
+http://sci.tuomastonteri.fi/programming/sse
+http://pages.cs.wisc.edu/~beechung/ref/gcc-intro.html
+

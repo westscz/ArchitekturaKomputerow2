@@ -1,0 +1,6 @@
+SDL_CFLAGS := $(shell sdl-config --cflags)
+SDL_LDFLAGS := $(shell sdl-config --libs)
+
+
+showimage: main.c
+	gcc main.c -o lab `sdl-config --cflags --libs` -lSDL_image -lSDLmain

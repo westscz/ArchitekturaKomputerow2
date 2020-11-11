@@ -1,0 +1,13 @@
+PROGRAM=cezar
+
+make: $(PROGRAM).s
+	as $(PROGRAM).s -o $(PROGRAM).o
+	ld $(PROGRAM).o -o $(PROGRAM)
+
+run:
+	./$(PROGRAM)
+
+clean:
+	rm -f $(PROGRAM) $(PROGRAM).o
+
+all: clean make run

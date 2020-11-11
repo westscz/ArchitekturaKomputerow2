@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int tab[1<<25];
+int tabIdx[1<<25];
+
+void generateRandTab(int *tabR, int n);
+
+int main(int argc, char * argv[]){
+long long int i,x,n;
+unsigned long long start, stop;
+
+for(n=10; n<16; ++n){
+
+printf("\nDLA ROZMIARU %d\n", 1<<n);
+	start = rdtsc();
+	for(i=0; i<(1<<n); ++i) tab[i] += 3;
+	stop = rdtsc();
+    printf("Czas zapisu sek = %llu\n",(stop-start)/(1<<n));
+
+	start = rdtsc();
+	for(i=0; i<(1<<n); ++i) x = tab[i];
+	stop = rdtsc();
+ 	printf("Czas odczytu sek = %llu\n",(stop-start)/(1<<n));
+
+
+	generateRandTab(tabIdx,n);
+
+
+	start = rdtsc();
+	for(i=0; i<(1<<n); ++i) tab[tabIdx[i]] += 3;
+	stop = rdtsc();
+    printf("Czas zapisu losowego = %llu\n",(stop-start)/(1<<n));
+
+	start = rdtsc();
+	for(i=0; i<(1<<n); ++i) x = tab[tabIdx[i]];
+	stop = rdtsc();
+ 	printf("Czas odczytu losowego = %llu\n",(stop-start)/(1<<n));
+
+}
+
+}
+
+void generateRandTab(int *tabR,int n){
+
+	int i=0;
+	
+	for(i=0; i<(1<<n); ++i) tabR[i] = rand() % (1<<25);
+}

@@ -1,0 +1,4 @@
+# Dependency
+
+pdflatex
+latexindent

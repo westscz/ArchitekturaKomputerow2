@@ -8,7 +8,7 @@ Zadaniem było stworzenie trzech aplikacji wykorzystując łączenie asemblera z
 	\item Program który wczyta dane w C, przetworzy je w ASM a następnie wyświetli w C
 	\item Program który wczyta dane w ASM, przetworzy i wyświetli w C
 	\item Program który wczyta dane w C, przetworzy je za pomocą wstawki ASM a następnie wyświetli w C
-\end{enumerate}}
+\end{enumerate}
 
 \section{Rozwiązanie}
 Od strony C zadanie nie wymagało dużej wiedzy. Aby skorzystać z funkcji napisanej w ASM należało dodać tutaj regułkę "`extern"'. Dzięki temu już mogliśmy działać z naszą funkcją, a jeśli wystąpiłby błąd - były on spowodowany na pewno po stronie kodu ASM.
@@ -33,8 +33,8 @@ Do połączenia wykorzystano funkcję z poprzednich zajęć do obliczania iterac
 silnia:
  pushq %rbp
  movq %rsp, %rbp
- movq %rdi, %rbx  
- 
+ movq %rdi, %rbx
+
  mov $1, %eax
  mov $0, %ecx
 Silnia_func:

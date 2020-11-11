@@ -1,0 +1,22 @@
+------ 
+
+32 i 64 bity - kompilacja i konsolidacja
+
+as --32 hello.s -o hello.o
+ld -V
+    GNU ld (GNU Binutils for Ubuntu) 2.22
+    Supported emulations:
+    elf_x86_64
+    elf32_x86_64
+    elf_i386
+    i386linux
+    elf_l1om
+    elf_k1om
+ld -melf_i386 hello.o -o hello
+file hello
+    hello: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, not stripped
+
+as hello.s -o hello.o
+ld hello.o -o hello
+file hello
+    hello: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped

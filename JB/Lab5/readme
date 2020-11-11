@@ -1,0 +1,29 @@
+1. Sprawdzanie stanu poszczególnych bitów w rejestrze stanu FPU (fpsr) i wyświetlanie stosownych komunikatów (standardowa funkcja C)
+zakaz użycia cmp
+uzywanie instr. logicznych (and or xor test)
+
+1a. Ustawienie trybu pracy FP (rejestr FPCR)
+2. Wytwarzanie poszczególnych wyjątków i wyświetlenie komunikatów - weryfikacja: gdb
+3. Uruchomienie i przetestowanieprocedury obliczeniowej (argumenty zmiennoprzeciwnkowe)
+
+
+sprawozdanie na za tydzien
+AKl-nazwisko
+przetwarzanie lancuchow znakow tekst liczba
+funkcje
+as i c
+jednostka zmienno przecinkpowa
+
+
+
+przetwarzanie obrazu w formacie bmp
+folder mmx -> plik w c odczytujacy plik i zapisujacy ja w postaci tablicy 2 wymiarowej
+zad - przetworzenie elementu tablicy
+
+przestawianie elementów tablicy (obracanie, wygaszanie) (może być w jęezyku c)
+przetwarzanie na poziomie pikseli (zmiana nasycenia barw, zmiana kolorow, przejscie na czarno białe) (wersja w asm i w asm z użyciem jednostki mmx)
+
+na początku zajęć odpytka
+struktura pliku bmp (efekt przeczytania pliku, co jest w tablicy)
+rozroznianie formatów pliku bmp
+znajomosc architektury jednostki mmx (formy instrukcji i sposób użycia instrukcji) jak działa arytmetyka

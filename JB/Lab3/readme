@@ -1,0 +1,82 @@
+FUNKCJE
+
+systemowe - 	parametry (,max 4) do rejestrów
+		int 0x80 - IA-32
+		syscall  - IA-32E
+
+dowolne - 	call nazwa_funkcji ->przekazanie sterowania funkcji, 
+			wraz z zapamietaniem sladu wywolania(adres powrotu)
+
+		(adres powrotu -> adres instrukcji następnej na stos
+
+		ret ->zwrot sterowania do poziomu wywolania(adres powrotu)
+
+przekazywanie parametrów do i z funkcji (wynik)
+	-rejestry procesora (ograniczenia)
+	-przez stos programowy - dynamiczna struktura dancyh 
+
+wskaznik stosu (esp-IA32/rsp-IA32E) - wskaznik na ostatnio wstawiona wartosc
+
+zalecane użycie jako wskażnika ramki/kontekstu funkcji
+				-rejestr ebp/rbp
+
+
+RAMKA/KONTEKST FUNKCJI
+----------------
+zmienne lokalnie
+----------------
+wskaznik kontekstu
+----------------
+adres powrotu
+----------------
+parametr N
+----------------
+...
+----------------
+parametr 2
+----------------
+parametr 1
+----------------
+xxxxxxxxxxxxxxx
+
+
+przy kompilacji C właściwe dla f. wywolywanej są rej. A, D, C
+
+przykład
+
+	push.. p1
+	push.. p2
+	call funkcja
+	add.. $N, %esp 	#N=ilość parametrów * 4 (IA-32)
+
+funkcja:
+	push... ebp/rbp ->stary ebp na stos
+#złóż na stos wszystkie rejestry push A
+	mov...	%esp, %ebp
+	.
+	.
+	.
+#	8(%ebp) <- adres parametru 2 (IA-32)
+	movl 8(%ebp), %eax
+#	-4(%ebp) <- adres 1 zmiennej lokalnej (IA-32)
+#	-8(%rbp) <- adres 1 zmiennej lokaljnej (IA-32E)
+	.
+	.
+	.
+	mov %ebp, %esp
+	pop %ebp
+ret
+
+
+
+
+
+
+Struktura stosu programowego odpowiada strukturze elementarnych danych
+	jednostka danych na stosie 	
+			IA-32 -> 4bajtów -> l -> as --32 ld -m elf
+			IA32E -> 8bajtów -> q -> as ld
+
+TODO: Łączenie programów w asemblerze z programami w C
+	konwersja tekst -> liczba
+		liczba -> tekst

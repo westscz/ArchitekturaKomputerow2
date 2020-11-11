@@ -1,0 +1,2 @@
+all:
+	gcc -g -o cw2 czasy.c

@@ -1,0 +1,15 @@
+OPER = mathOperations/integrate.s mathOperations/fpu_mul.s mathOperations/fpu_div.s mathOperations/fpu_add.s mathOperations/fpu_sub.s
+CONTROL = controlWord/get_fpu.s controlWord/set_fpu.s
+
+all:
+	@echo "kompilacja:"
+	gcc -g -o program lab4.c $(OPER) $(CONTROL) rdtsc.c
+
+test: lab4
+	@echo "test:"
+	./program
+
+clean:
+	@echo "czyszczenie katalogu:"
+	rm program
+	rm *.o

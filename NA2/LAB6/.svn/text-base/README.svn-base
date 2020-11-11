@@ -1,0 +1,37 @@
+Lab 6: Pamięć podręczna i jej wpływ na wydajność
+
+Zagadnienia:
+- mapowanie pamięci RAM na pamięć podręczną
+- kontrolowane wywoływanie trafień/chybień
+- pokazanie struktury pamięci podręcznej na podstawie pomiarów czasów spreparowanej sekwencji odczytów
+
+        Po zaliczeniu ćwiczenia student powinien rozumieć, dlaczego odnowienie
+        adresowanie elementów macierzy dwuwymiarowej potrafi o rząd wielkości
+        zwiększyć wydajność i kiedy to nie jest prawda
+
+Przykładowe zagadnienia:
+a) zademonstrować możliwość zwiększenia wydajności algorytmu mnożenia dużych
+  macierzy (~10000XM1000) liczb zmiennoprzecinkowych przez wektor/macierz
+  wykorzystując rozszerzenia SSE i optymalizując sposób dostępu do pamięci
+b) wskazać parametry pamięci podręcznych (liczba poziomów, długość linii,
+  drożność, rozmiar na każdym poziomie) na podstawie czasu dostępu do pamięci w
+  spreparowanej sekwencji odczytów
+
+Ad b)
+- Należy wykazać: rozmiar linii, rozmiary pamięci podręcznych La i La, drożność
+  pamięci podręcznych, średni czas odczytu i zapisu sekwencyjnego i losowego z/do
+  pamięci podręcznych La/La/(La) oraz pamięci głównej, rozmiar strony
+- w plikach jpg notatki z tablicy
+- rozliczenie na podstawie raportu w pliki README oraz kodu; przygotowany program
+  powinien automatycznie zademonstrować wpływ parametrów struktury pamięci 
+
+
+Literatura:
+What Every Programmer Should Know About Memory - www.akkadia.org/drepper/cpumemory.pdf
+J. Biernat, Architektura Komputerów (wyd III, 2002) - rozdział 8: System pamięci,
+rozdział 6.3: Zarządzanie pamięcią
+Intel® 64 and IA-32 Architectures Software Developer’s Manual, tom 3.: 
+r. 11 Memory Cache Control (aż do 11.4 włącznie (Control Protocol)),
+r. 3 PROTECTED-MODE MEMORY MANAGEMENT
+
+Intel Ivy Bridge Cache Replacement Policy: http://blog.stuffedcow.net/2013/01/ivb-cache-replacement/

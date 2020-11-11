@@ -1,0 +1,2 @@
+all:
+	gcc -std=c99 -g -o prog4 prog1.c dodawanie.s

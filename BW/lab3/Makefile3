@@ -1,0 +1,3 @@
+# reguła kompilacji i linkowania
+all:
+	gcc -std=c99 -g -o cw3 prog.c dodawanieBezPetli.s dodawanieZPetla.s

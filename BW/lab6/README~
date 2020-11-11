@@ -1,0 +1,52 @@
+Log z prób zapisu do pamięci na procesorze intel i7 640 LM, równo co 256kB(0x200000) widać czas zapisu rzędu 600tyś cykli, który nie wiadomo skąd się bierze.
+komorka : 0x7e852394 , czas: 6710 
+komorka : 0x7ea00000 , czas: 637854 
+komorka : 0x7ec00000 , czas: 847568 
+komorka : 0x7ec00780 , czas: 6732 
+komorka : 0x7ec60dfc , czas: 6760 
+komorka : 0x7ecfc000 , czas: 12541 
+komorka : 0x7ed708f0 , czas: 8161 
+komorka : 0x7ee00000 , czas: 638980 
+komorka : 0x7ef403b8 , czas: 6685 
+komorka : 0x7f000000 , czas: 653282 
+komorka : 0x7f1db828 , czas: 6764 
+komorka : 0x7f200000 , czas: 736930 
+komorka : 0x7f206938 , czas: 6637 
+komorka : 0x7f36dcf4 , czas: 7937 
+komorka : 0x7f400000 , czas: 655706 
+komorka : 0x7f58f7f4 , czas: 6668 
+komorka : 0x7f59d3ec , czas: 24195 
+komorka : 0x7f600000 , czas: 680800 
+komorka : 0x7f60077c , czas: 6646 
+komorka : 0x7f800000 , czas: 677250 
+komorka : 0x7f800674 , czas: 6656 
+komorka : 0x7f8cb1ac , czas: 12482 
+komorka : 0x7f8cb920 , czas: 6710 
+komorka : 0x7f968990 , czas: 1417 
+komorka : 0x7f98dca0 , czas: 17930 
+komorka : 0x7fa00000 , czas: 624898 
+komorka : 0x7fb1a9d4 , czas: 9642 
+komorka : 0x7fb22fa8 , czas: 6732 
+komorka : 0x7fc00000 , czas: 704479 
+komorka : 0x7fc05bb8 , czas: 6584 
+komorka : 0x7fe00000 , czas: 695570 
+komorka : 0x7fedf68c , czas: 6734 
+komorka : 0x7ff51c70 , czas: 6700 
+komorka : 0x7ff624e0 , czas: 6892 
+komorka : 0x7ffce264 , czas: 25602 
+komorka : 0x80000000 , czas: 710716 
+komorka : 0x80008c4c , czas: 6639 
+komorka : 0x8008cc54 , czas: 13304 
+komorka : 0x8009538c , czas: 6684 
+komorka : 0x80200000 , czas: 628802 
+komorka : 0x802087a0 , czas: 6637 
+komorka : 0x8021121c , czas: 6712 
+komorka : 0x80219408 , czas: 6748 
+
+Na komputerze z laboratorium udało się odczytać dokładnie długość stron co jest przedstawione poniżej:
+komorka : 0x40601060 , czas: 8948 
+komorka : 0x40602000 , czas: 6576 
+komorka : 0x40603000 , czas: 5944 
+komorka : 0x40604000 , czas: 6296 
+komorka : 0x40605000 , czas: 6144 
+Jak widać strona posiada 0x1000B czyli 4096 B

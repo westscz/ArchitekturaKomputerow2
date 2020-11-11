@@ -1,0 +1,38 @@
+Kamil Sojka 195352
+
+Program pozwala na wykonywanie dzialan arytmetycznych tj. dodawanie,
+odejmowanie, mnozenie i dzielenie dwoch liczb zmiennoprzecinkowych.
+Umozliwia rowniez zmiane trybu zaokraglania i precyzji. 
+Dodatkowowo mozliwe jest wyliczenie calki 1/x na zadanym przedziale
+z zadana liczba iteracji. 
+
+-----Wczytywanie-----
+> Wczytywanie realizowane zgodnie z menu programu
+
+-----Zmiana CW-----
+> Pobierana jest wartosc rejestru kontrolnego (FNSTCW)
+> Nastepnie na tej wartosci wykonywany jest OR z 0x0F00
+  oraz odpowiedni AND np. 0xf6ff dla podwojnej precyzji/zaokraglanie w dol
+> Wynik wczytywany do rejestru kontrolnego (FLDCW)
+
+-----Dod/Odej/Mno/Dzi-----
+> Operacje te realizowane sa w sposob analogiczny do funkcji dodawania
+  dostarczonej przez prowadzacego
+> W funkcji dodawania wypisywany jest takze wynik w IEEE
+
+-----Calkowanie-----
+> Calkowana jest funkcja 1/x metoda prostokatow
+> Mozliwa jest zmiana przedzialu calkowania i ilosci iteracji
+> Wynik wyliczany jest poprzez dodanie kolejnych pol prostokatow o 
+  bokach (b-a/iter) oraz (1/(a+x*(b-a)/iter)), gdzie:
+	- iter - liczba iteracji
+	- a - dolna granica calkowania
+	- b - gorna granica calkowania
+	- x - i-ty prostokat
+> Wyliczany jest takze czas wykonania calkowania w cyklach
+
+-----Kompilacja-----
+> Do zadania dolaczono plik Makefile
+> Poszczegolne pliki zostaly umieszczone w osobnych katalogach:
+ 	- mathOperations - katalog z operacjami arytm. i calkowaniem
+	- controlWord - katalog z metodami get_fpu i set_fpu

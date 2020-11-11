@@ -1,0 +1,16 @@
+b Encryption
+#b NextEn if $esi>2
+
+def out_test
+ x/10cb &out
+end
+
+def al
+ print $al
+end
+
+def bl
+ print $bl
+end
+ 
+

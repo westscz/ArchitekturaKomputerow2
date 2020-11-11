@@ -1,0 +1,13 @@
+all: program1 clean start
+
+program1: program1.o
+	ld program1.o -o program1
+
+program1.o: program1.s
+	as program1.s -o program1.o
+
+clean:
+	rm -rf *.o
+
+start:
+	./program1

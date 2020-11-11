@@ -1,0 +1,15 @@
+
+all: kompilacja test
+
+kompilacja:
+	@echo "kompilacja:"
+	gcc -g -o program lab5.c integrate.s rdtsc.c
+
+test:
+	@echo "test:"
+	./program
+
+clean:
+	@echo "czyszczenie katalogu:"
+	rm -f program
+	rm -f *.o

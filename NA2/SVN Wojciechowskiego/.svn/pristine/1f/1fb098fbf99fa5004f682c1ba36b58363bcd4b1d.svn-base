@@ -1,0 +1,58 @@
+Zadanie lab3:
+
+1. Wywołać funkcje printf i scanf z poziomu asemblera, podać do każdej funkcji
+minimum 3 parametry różnego typu.
+2. Zmierzyć czas wywołania obu funkcji wykorzystując instrukcję RDTSC. 
+3. Napisać funkcję w asemblerze dodającą 2 liczby wielokrotnej precyzji (np.
+1024-bajtowe). Wywołać tę funkcję z poziomu programu w języku C, zademonstrować
+jej poprawność w trybie krokowym w debugerze.
+4. Program wczytujący 2 liczby wielokrotnej precyzji w formacie 0x0123..CDEF z STDIN,
+wykonujący operację (GCD, iloczyn, suma) i wypisujący wynik.
+przykładowy zestaw plików: README, Makefile (w tym reguły clean, test), prog.c, dodaj.s, konwertuj.s
+szczegóły:
+wykorzystać gcc (opcje -S i -v)
+(tylko jako pomoc - do wglądu jak wywoływane są funkcje)
+Wymagania szczegółowe:
+statycznie zadeklarowane bufory w postaci tablic bajtów (np. unsigned char [4096] liczba_a)
+w pliku prog.c deklaracje funkcji (np. dodaj i konwertuj)
+przykładowo funkcja dodaj - dodaje 2 liczby naturalne lub całkowite rozszerzonej precyzji (np 2 Kb)
+funkcja konwertuj - konwertuje liczbę zapisaną w postaci napisu (kody ascii
+kolejnych cyfr) do postaci binarnej w konwencji LE - Little Endian - każdy
+kolejny bajt w pamięci zawiera kolejne (wyższe) 8 bitów liczby.
+wszystkie funkcje operują na tablicach bajtów (unsigned char*) - w praktyce na wskaźnikach
+Przykładowy prototyp funkcji dodającej: 
+
+void dodaj(char* l1, char* l2, char* wynik);
+
+I/O - za pomocą języka C - printf/scanf
+
+Kompilacja: gcc -o prog prog.c dodaj.s konwertuj.s
+
+######################### konwersja napisu na liczbę #########################
+(adresy rosną "w prawo")
+buf_we:  '0x123123': '0''x''1''2''3''1''2''3''\n'00000000..... 
+                    (kolejne bajty zawierają znaki lub wartość 0 (koniec napisu))
+liczba:            :  35,49,18,0,0,0......  (kolejne bajty oddzielone przecinkami)
+
+######################### notatki i zagadnienia ##############################
+Lab 3
+Łączenie kodu asemblera z kodem w C:
+- ramka stosu
+- podział programu na kilka plików źródłowych
+- pojecie "symboli" i krótkie omówienie konsolidacji
+- różnice pomiędzy wywołaniem funkcji jadra a funkcji bibliotecznych
+- pomiar czasu wysokiej rozdzielczości z wykorzystaniem instrukcji RDTSC
+- podstawy pisania kodu o wysokiej wydajności - usuwanie niepotrzebnych operacji
+  z pętli (printf, malloc)
+- analiza kodu generowanego przez kompilator - zapobieganie optymalizacjom
+  kompilatora wynikającymi np. z obliczenia wartości wyrażenia podczas
+  kompilacji
+  Po zaliczeniu student powinien umieć pisać programy składające się w części z
+  plików asemblerowych, a w części z kodu w C. Powinien tez rozumieć, gdzie są
+  podstawowe pułapki powodujące spadek wydajności kodu.
+
+####### literatura ########
+ABI 32/64b (głównie rozdział 3.)
+http://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf
+http://math-atlas.sourceforge.net/devel/assembly/abi386-4.pdf
+

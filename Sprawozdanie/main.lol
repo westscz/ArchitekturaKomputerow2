@@ -11,3 +11,7 @@
 \contentsline {lstlisting}{\numberline {5.2}Funkcja odbijaj\IeC {\k a}ca obraz w pionie}{15}
 \contentsline {lstlisting}{\numberline {5.3}Funkcja odbijaj\IeC {\k a}ca obraz po przek\IeC {\k a}tnej}{15}
 \contentsline {lstlisting}{\numberline {5.4}Funkcja odbijaj\IeC {\k a}ca obraz w pionie}{15}
+\contentsline {lstlisting}{\numberline {6.1}Funkcja CPUID}{17}
+\contentsline {lstlisting}{\numberline {6.2}Funkcja odczytuj\IeC {\k a}ca i weryfikuj\IeC {\k a}ca cpuid}{17}
+\contentsline {lstlisting}{\numberline {6.3}Funkcja RDTSC}{18}
+\contentsline {lstlisting}{\numberline {6.4}Przyk\IeC {\l }adowa funkcja obliczaj\IeC {\k a}ca ilo\IeC {\'s}\IeC {\'c} cykli dla odczytu danych z tablicy 4096 int\IeC {\'o}w}{18}

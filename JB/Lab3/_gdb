@@ -1,0 +1,25 @@
+#b Encryption
+#b NextEn if $esi>2
+
+def tester
+ print $eax
+ print $ebx
+end
+
+def regs
+ si
+ printf "a=%d b=%d c=%d d=%d",$eax,$ebx,$ecx,$edx
+
+end
+
+def dec
+ c
+ print $eax
+ print $ebx
+end
+
+def krok
+ si
+ print $eax
+ print $ebx
+end

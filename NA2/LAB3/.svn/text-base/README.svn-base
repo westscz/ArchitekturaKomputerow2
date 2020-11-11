@@ -1,0 +1,31 @@
+Kamil Sojka 195352
+
+Program realizuje konwersje dwoch liczb zapisanych w systemie szesnastkowym na system binarny,
+dodanie ich i wypisanie wyniku na STDOUT.
+
+-----Wczytywanie (C)-----
+> Wczytywane sa 2 liczby szesnastkowe w postaci: 0x0123...cdef
+> Przedrostek ani poszczególne znaki nie są sprawdzane pod kątem poprawności.
+> Wielkość liter 'abcdef' nie ma znaczenia.
+> Wczytane liczby zapisywane są do tablic bajtow char[4096]
+
+-----Konwersja (C)-----
+> Konwertuje liczbę zapisaną w postaci napisu do postaci binarnej w konwencji LE
+> Z napisu pobierane są po dwa znaki, które zamieniane są na jeden char
+> Funkcja zwraca wskaźnik na tablice unsigned char oraz rozmiar tej tablicy 
+> Rozmiar tablicy jest rowny dlugosci_slowa/2 + 1 
+
+-----Dodawanie (Ass)-----
+> Dodaje 2 liczby binarne rozszerzonej precyzji do 2Kb
+> Jako argumenty funkcja przyjmuje wskazniki na trzy tablice oraz ich wielkosci
+> Dodawane sa bajty, w razie potrzeby ustawiana jest flaga przeniesienia
+> Wynik zapisywany jest do tablicy wynikowej
+> Rozmiar tej tablicy jest o jeden wiekszy niz rozmiar_wiekszej_tablicy
+
+-----Wyswietlenie (C)-----
+> Przy uzyciu operatora bitowego AND i przesuniecia bitowego wyswietlany jest uzyskany wynik
+
+-----Kompilacja-----
+> Do zadania dołączono plik Makefile
+> Zdefiniowana została reguła 'test' pozwalająca uruchomić program
+> Zdefiniowana została reguła 'clean' pozwalająca wyczyścić pliki *.o

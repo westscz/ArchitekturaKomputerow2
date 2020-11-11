@@ -1,0 +1,43 @@
+<HTML>
+<head>
+      <meta http-equiv="content-type"
+        content="text/html; charset=iso-8859-2">
+     <META NAME="Description" CONTENT="Wyk³ady po¶wiêcone zagadnieniom z ró¿nych dzia³ów fizyki, matematyki i informatyki napisane w sposób przystêpny i zrozumia³y.">
+      <TITLE> Neutrino - Opis formatu BMP</TITLE>
+      <link rel="SHORTCUT ICON" href="rysunki/favicon.ico">
+</head>
+<BODY>
+<BR>
+<CENTER><TABLE style="width:600px"><TR><TD>
+<CENTER><B> Opis formatu BMP </B></CENTER>
+<BR><BR>
+W tym krótkim wyk³adzie postaram siê omówiæ format BMP (Mapa Bitowa). Jest to chyba najprostszy sposób zapisu grafiki. W zale¿no¶ci od ilo¶ci kolorów rozró¿niamy zapisy jedno- bitowe ( czarny/bia³y), 4 bitowe (16 kolorów), 8 bitowe (256 kolorów) oraz 24 bitowe (16.7 miliona kolorów). W przypadku zapisu 4 bitowego jeden bajt zawiera informacje na temat dwóch pixeli, dla zapisu 8 bitowego jeden bajt mówi nam o kolorze pojedynczego pixela. Równie prosty zapis jest w przypadku 24 bitów, poniewa¿ kolejne bajty odnosz± siê do kolejnych warto¶ci w palecie RGB (Red, Green, Blue) z jedn± ró¿nic± - pierwszy bajt odnosi siê do nasycenia koloru niebieskiego, drugi do zielonego, a trzeci do czerwonego. Bajty przyjmuj± warto¶ci od 0 do 255. W przypadku plików 1 ,4 oraz 8 bitowych mog± wystêpowaæ palety kolorów zapisane tu¿ za nag³ówkiem. W przypadku pliku 24 bitowego paleta kolorów jest pomijana.
+Sam nag³ówek pliku BMP wygl±da nastêpuj±co:<BR>
+<IMG SRC="bmp.gif" align=center>
+<BR>
+Ca³y nag³ówek zazwyczaj zajmuje 54 bajty. Nie nale¿y siê jednak dziwiæ, je¿eli nasz nag³ówek oka¿e siê byæ d³u¿szy i mieæ np. 62 bajty. Ró¿ne programy graficzne ró¿nie zapisuj± nag³ówki. Prostym sposobem poradzenia sobie z tym problemem jest sprawdzenie wielko¶ci pliku graficznego a nastêpnie odjêcie (szeroko¶æ x wysoko¶æ)*(ilo¶æ bajtów przypadaj±cych na jeden pixel). Metoda ta mo¿e nie zadzia³aæ w przypadku plików których szeroko¶æ jest nie podzielna przez 4. Kolejn± wa¿na rzecz± o jakiej nale¿y pamiêtaæ jest sposób zapisu nag³ówka. Je¿eli chcemy odczytaæ np. szeroko¶æ bitmapy nale¿y odczytaæ 19 bajt nastêpnie dodaæ do niego 20 bajt przemno¿ony przez 256 nastêpnie 21 przemno¿ony przez 65536 a nastêpnie bajt 22 przemno¿ony przez 16 777 216. Jest to dok³adnie na odwrót ni¿ w wiêkszo¶ci plików. Kolejn± pu³apk±, jaka na nas czeka jest orientacja mapy bitowej poniewa¿ obrazek w pliku zapisany jest do góry nogami. Niestety :( . Pierwsze 3 bajty (dla palety 24 bitowej) odpowiadaj± pixelowi w lewym dolnym rogu ekranu.
+Kolejn± rzecz±, o któr± musimy zadbaæ jest ilo¶æ znaków w linii, która zawsze musi byæ podzielna przez 4. Je¿eli np. mamy do zapisania bajty A0 B0 BB F5 F6 to w pliku musimy je zapisaæ jako A0 B0 BB F5 F6 00 00 00 czyli musimy dodaæ tyle bajtów zerowych aby ilo¶æ znaków w linii by³a podzielna przez 4.
+Mo¿e jeszcze klika s³ów o palecie kolorów RGB. Ka¿dy kolor palety RGB która (dla 24 bitowego pliku) sk³ada siê z 16,7 miliona kolorów jest zapisany za pomoc± charakterystycznego tylko dla siebie kodu nasycenia koloru czerwonego (kana³ czerwony) nastêpnie zielonego (kana³ zielony) i niebieskiego (kana³ niebieski) - przypominamy, ¿e w pliku BMP kolejno¶æ jest odwrotna - niebieski - zielony - czerwony. Istniej± równie¿ inne palety kolorów takie jak YUV, która sk³ada siê z luminacji (Y) oraz dwóch kana³ów chrominancji (U i V). Z palety RGB mo¿na przej¶æ na paletê YUV wed³ug poni¿szych wzorów :<BR>
+<BR>
+Y=0,3 *R+0,59*G+0,11B 	(luminacja)<BR>
+U=(B-Y)*0,493 (chrominancja  1 (kolorowo¶æ) )<BR>
+V=(R-Y)*0,877 (chrominancja 2 (kolorowo¶æ) )<BR>
+<BR>
+Istnieje równie¿ bardzo podobna paleta zwana YIQ (gdzie Y - luminacja , I, Q -chrominancje)<BR>
+<BR>
+Y=0,3*R+0,59*G+0,11B 	(luminacja)<BR>
+I=0,6 *R-0,28*G-0,32B     (chrominancja (kolorowo¶æ) 1)<BR>
+Q=0,21*R-0,52*G+0,31 B (chrominancja (kolorowo¶æ) 2)<BR>
+<BR>
+Luminacja okre¶la jasno¶æ pixela (Brightness) , natomiast chrominancja okre¶la jego nasycenie (Saturation) oraz odcieñ (Hue).
+
+</TD></TR></TABLE><CENTER>
+
+
+
+
+
+</BODY>
+</HTML>
+
+<!--ISO-->

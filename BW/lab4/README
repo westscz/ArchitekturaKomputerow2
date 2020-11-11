@@ -1,0 +1,1 @@
+Program przedstawia zmiane trybu zaokrąglania fpu do ucinania końcówki. Oraz przedstawia wynik całki od 0.001 do 1000 przy 10 mln kroków oraz ilość cykli która została użyta do wykonania tej operacji. Obliczanie całki zostało wykonane przy użyciu FPU.

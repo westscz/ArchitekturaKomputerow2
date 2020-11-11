@@ -1,0 +1,11 @@
+set style data linespoints
+set terminal png size 1366,600
+set output "Wykres.png"
+set notitle
+set ylabel "CYKLE PROCESORA"
+set xlabel "ILOSC BAJTÓW"
+set logscale x 2
+
+
+
+plot 'zapisLosowy'

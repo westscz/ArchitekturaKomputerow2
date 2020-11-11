@@ -1,0 +1,9 @@
+Plik Makefile1 odpowiada za wykonanie pierwszego ćwiczenia tzn. Skompilowanie funkcji printf oraz scanf do kodu asm.
+
+Plik Makefile2 odpowiada za wykonanie drugiego ćwiczenia tzn. Zmierzenie czasu wykonywania funkcji scanf oraz printf. Częstotliwość procesora była ustawiona "na sztywno" i tak samo zostało to uczynione w kodzie. Dlatego też wynik na innych komputerach może być zakłamany.
+
+Plik Makefile3 odpowiada za wykonanie trzeciego ćwiczenia tzn. dodawanie dwóch liczb o rozmiarze maksymalnym 1024 znaki. Program został wykonany na dwa sposoby. Pierwszy wykonuje dodawanie przy uzyciu pętli napisanej w ASM,a co za tym idzie funkcja jest wywoływana tylko raz. Drugi sposób to pętla napisana w kodzie napisanym w C i przy każdym przejściu pętli jest wywoływana funkcja napisana w ASM. W obu przypadkach zostały policzone ilości cykli użytych do tych dodawań. W przypadku małej ilości wprowadzonych cyfr wydajniejszy jest algorytm którego pętla została napisana przy użyciu C i funkcja jest wywoływana przy każdym przejściu pętli. W przeciwnym wypadku wydajniejszy jest algorytm który zostaje tylko raz wywołany.
+
+Plik Makefile4 odpowiada za wykonanie czwartek ćwiczenia tzn. program dodaję dwie liczby szesnastkowe. Liczby muszą być zapisane dużymi literami i muszą zostać poprzedzone symbolem 0x. Do stworzenia programu jest dołaćzony Makefile
+
+ 
